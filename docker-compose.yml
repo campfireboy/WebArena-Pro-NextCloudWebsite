@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  nextcloud:
+    build: .
+    ports:
+      - "8080:80"
+    volumes:
+      - nextcloud_data:/var/www/html
+      - ./media/agent1:/seed/agent1
+      - ./media/agent2:/seed/agent2
+    environment:
+      - NEXTCLOUD_ADMIN_USER=admin
+      - NEXTCLOUD_ADMIN_PASSWORD=admin
+
+volumes:
+  nextcloud_data:

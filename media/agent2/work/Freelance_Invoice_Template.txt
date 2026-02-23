@@ -1,0 +1,9 @@
+INVOICE #0045
+Date: 2026-04-12
+
+Services Rendered: Logo Redesign & Branding Package
+Hours: 25
+Rate: $85/hr
+Total Due: $2,125.00
+
+Please remit payment within 30 days.

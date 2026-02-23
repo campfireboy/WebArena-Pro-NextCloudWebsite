@@ -1,0 +1,4 @@
+Title: Weekly_Status_Report.md
+Creator: Nextcloud Generator Script
+License: CC0 1.0 Universal (Public Domain)
+License URL: https://creativecommons.org/publicdomain/zero/1.0/

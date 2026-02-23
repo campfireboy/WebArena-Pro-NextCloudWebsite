@@ -1,0 +1,4 @@
+Project Alpha Kickoff Notes
+- Need to finalize API endpoints
+- UI mockups due by Friday
+- Database schema migrating to PostgreSQL
