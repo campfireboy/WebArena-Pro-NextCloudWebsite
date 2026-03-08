@@ -25,9 +25,8 @@ php occ app:install notes || true
 php occ app:install spreed || true # Talk app
 php occ app:install richdocuments || true # Nextcloud Office
 php occ app:install richdocumentscode || true # Built-in Collabora server
-php occ config:app:set richdocuments wopi_url --value="http://127.0.0.1/custom_apps/richdocumentscode/proxy.php?req="
-php occ config:app:set richdocuments public_wopi_url --value="http://127.0.0.1/custom_apps/richdocumentscode/proxy.php?req="
 php occ config:app:set richdocuments disable_certificate_verification --value="yes"
+php occ config:app:set richdocuments wopi_allowlist --value="0.0.0.0/0,127.0.0.1"
 #decided againt mail app for now because it requires providing a real email address
 #php occ app:install mail || true
 
@@ -50,7 +49,7 @@ cp -r /seed/agent1/* /var/www/html/data/agent1/files/ || true
 cp -r /seed/agent2/* /var/www/html/data/agent2/files/ || true
 
 echo "Starting socat loopback routing for Nextcloud Office..."
-socat TCP-LISTEN:8080,fork,bind=127.0.0.1 TCP:127.0.0.1:80 &
+socat TCP-LISTEN:8080,fork,bind=0.0.0.0 TCP:127.0.0.1:80 &
 
 
 php occ files:scan --all
