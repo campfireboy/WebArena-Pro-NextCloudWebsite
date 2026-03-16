@@ -62,12 +62,32 @@ echo "Scheduling background API seeding..."
     sleep 5
   done
 
+  php occ config:app:set richdocuments wopi_url --value="http://localhost:8080/custom_apps/richdocumentscode/proxy.php?req="
+
   echo "Apache is up. Executing API seeding scripts..."
   bash /seedDir/calendar.sh
   bash /seedDir/contacts.sh
   bash /seedDir/talk.sh
 
-  echo "Background API seeding complete!"
-) &
+
+  echo "Verifying Office Handshake..."
+
+  MAX_RETRIES=10
+  COUNT=0
+
+  until php occ richdocuments:activate-config > /dev/null 2>&1 || [ $COUNT -eq $MAX_RETRIES ]; do
+    echo "Handshake pending... retrying ($((COUNT+1))/$MAX_RETRIES)"
+    sleep 5
+    COUNT=$((COUNT+1))
+  done
+
+  if [ $COUNT -eq $MAX_RETRIES ]; then
+    echo "ERROR: Office handshake failed after $MAX_RETRIES attempts. Moving on..."
+  else
+    echo "Handshake Verified! Office is ready for all users."
+  fi
+
+    echo "Background API seeding complete!"
+  ) &
 
 echo "Seeding complete."
